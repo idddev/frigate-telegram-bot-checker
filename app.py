@@ -1,5 +1,5 @@
 # ping_app.py
-from envs import LAST_ALERT_FILE, LAST_PING_FILE, PING_INTERVAL, PING_TIMEOUT, TELEGRAM_CHAT_ID, TELEGRAM_TOKEN
+from envs import LAST_ALERT_FILE, LAST_PING_FILE, PING_INTERVAL, PING_TIMEOUT, PORT, TELEGRAM_CHAT_ID, TELEGRAM_TOKEN
 from fastapi import FastAPI
 from pydantic import BaseModel
 from datetime import datetime, timedelta
@@ -119,4 +119,4 @@ async def startup_event() -> None:
     asyncio.create_task(check_ping())
 
 if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(app, host="0.0.0.0", port=PORT)

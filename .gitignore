@@ -1,2 +1,4 @@
 __pycache__
 .env
+last_ping.txt
+last_alert.txt

@@ -1,0 +1,10 @@
+services:
+  frigate-telegram-bot-checker:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: frigate-telegram-bot-checker
+    env_file:
+      - .env
+    network_mode: host
+    restart: unless-stopped
