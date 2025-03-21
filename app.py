@@ -115,6 +115,17 @@ async def check_ping() -> None:
 
 @app.on_event("startup")
 async def startup_event() -> None:
+    global last_ping_time
+    # Leemos el ultimo ping si esta disponible
+    if os.path.exists(LAST_PING_FILE):
+        try:
+            with open(LAST_PING_FILE, "r") as f:
+                last_ping_str = f.read().strip()
+                last_ping_time = datetime.fromisoformat(last_ping_str)
+                logger.info("Último ping recibido a las %s.", last_ping_time.isoformat())
+        except Exception as e:
+            logger.error("Error leyendo %s: %s", LAST_PING_FILE, e)
+            
     # Inicia la tarea en segundo plano para revisar pings
     asyncio.create_task(check_ping())
 
